@@ -253,12 +253,15 @@ if (registerBtn) {
     const reportsCloseBtn = document.querySelector('.reports-modal__close-btn');
     const reportsRequestsBtn = document.querySelector('.reports-modal__requests-btn');
     const reportsRequestsTable = document.querySelector('.reports-modal__requests-table');
+    const reportsOverdueBtn = document.querySelector('.reports-modal__overdue-btn');
+    const reportsOverdueTable = document.querySelector('.reports-modal__overdue-table');
 
     if (reportsBtn && reportsModal) {
         reportsBtn.addEventListener('click', function () {
             reportsModal.classList.add('active');
             reportsTable.classList.add('visually-hidden');
             if (reportsRequestsTable) reportsRequestsTable.classList.add('visually-hidden');
+            if (reportsOverdueTable) reportsOverdueTable.classList.add('visually-hidden');
         });
     }
     if (reportsCloseBtn && reportsModal) {
@@ -342,6 +345,50 @@ if (registerBtn) {
                 });
         });
     }
+    if (reportsOverdueBtn && reportsOverdueTable) {
+        reportsOverdueBtn.addEventListener('click', function () {
+            fetch('get_overdue_orders.php')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        let html = `<table>
+                            <tr>
+                                <th>ID</th>
+                                <th>User ID</th>
+                                <th>Имя</th>
+                                <th>Услуга</th>
+                                <th>Цена</th>
+                                <th>Телефон</th>
+                                <th>Дата заказа</th>
+                                <th>Срок выполнения</th>
+                            </tr>`;
+                        data.orders.forEach(order => {
+                            html += `<tr>
+                                <td>${order.id}</td>
+                                <td>${order.user_id}</td>
+                                <td>${order.username}</td>
+                                <td>${order.service}</td>
+                                <td>${order.price}</td>
+                                <td>${order.phone}</td>
+                                <td>${order.created_at}</td>
+                                <td>${order.deadline}</td>
+                            </tr>`;
+                        });
+                        html += `</table>`;
+                        reportsOverdueTable.innerHTML = html;
+                        reportsOverdueTable.classList.remove('visually-hidden');
+                        reportsTable.classList.add('visually-hidden');
+                        reportsRequestsTable.classList.add('visually-hidden');
+                    } else {
+                        reportsOverdueTable.innerHTML = '<div style="color:red;">Ошибка загрузки данных</div>';
+                        reportsOverdueTable.classList.remove('visually-hidden');
+                        reportsTable.classList.add('visually-hidden');
+                        reportsRequestsTable.classList.add('visually-hidden');
+                    }
+                }) // Закрываем вызов then
+                .catch(error => console.error('Ошибка:', error)); // Добавляем обработку ошибок
+    }); // Закрываем addEventListener
+}
 
     // Для advantages-form: блокировка кнопки без согласия
     const advForm = document.querySelector('.advantages-form');

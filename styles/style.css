@@ -912,10 +912,37 @@
     width: 100%;
     border-collapse: collapse;
 }
-.reports-modal__table th, .reports-modal__table td {
+.reports-modal__table th,
+.reports-modal__table td {
     border: 1px solid #ccc;
-    padding: 6px 10px;
+    padding: 10px 15px; /* Увеличиваем отступы */
     text-align: left;
+}
+
+.reports-modal__table table {
+    border-spacing: 0 10px; /* Добавляем расстояние между строками */
+}
+
+.reports-modal__requests-table th,
+.reports-modal__requests-table td {
+    border: 1px solid #ccc;
+    padding: 10px 15px; /* Увеличиваем отступы */
+    text-align: left;
+}
+
+.reports-modal__requests-table {
+    border-spacing: 0 10px; /* Добавляем расстояние между строками */
+}
+
+.reports-modal__overdue-table th,
+.reports-modal__overdue-table td {
+    border: 1px solid #ccc;
+    padding: 10px 15px; /* Увеличиваем отступы */
+    text-align: left;
+}
+
+.reports-modal__overdue-table {
+    border-spacing: 0 10px; /* Добавляем расстояние между строками */
 }
 
 .about-content {
