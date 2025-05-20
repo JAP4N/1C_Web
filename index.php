@@ -397,7 +397,9 @@
         <div class="reports-modal__content">
             <h2>Отчеты</h2>
             <button class="btn reports-modal__orders-btn">Оформленные заказы пользователей</button>
+            <button class="btn reports-modal__requests-btn">Поступившие запросы на консультацию</button>
             <div class="reports-modal__table visually-hidden"></div>
+            <div class="reports-modal__requests-table visually-hidden"></div>
             <button class="btn reports-modal__close-btn" style="margin-top:20px;">Закрыть</button>
         </div>
     </div>

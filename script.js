@@ -251,11 +251,14 @@ if (registerBtn) {
     const reportsOrdersBtn = document.querySelector('.reports-modal__orders-btn');
     const reportsTable = document.querySelector('.reports-modal__table');
     const reportsCloseBtn = document.querySelector('.reports-modal__close-btn');
+    const reportsRequestsBtn = document.querySelector('.reports-modal__requests-btn');
+    const reportsRequestsTable = document.querySelector('.reports-modal__requests-table');
 
     if (reportsBtn && reportsModal) {
         reportsBtn.addEventListener('click', function () {
             reportsModal.classList.add('active');
             reportsTable.classList.add('visually-hidden');
+            if (reportsRequestsTable) reportsRequestsTable.classList.add('visually-hidden');
         });
     }
     if (reportsCloseBtn && reportsModal) {
@@ -296,6 +299,45 @@ if (registerBtn) {
                     } else {
                         reportsTable.innerHTML = '<div style="color:red;">Ошибка загрузки данных</div>';
                         reportsTable.classList.remove('visually-hidden');
+                    }
+                });
+        });
+    }
+    if (reportsRequestsBtn && reportsRequestsTable) {
+        reportsRequestsBtn.addEventListener('click', function () {
+            fetch('get_advantages_requests.php')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        let html = `<table>
+                            <tr>
+                                <th>ID</th>
+                                <th>User ID</th>
+                                <th>Логин</th>
+                                <th>Имя из формы</th>
+                                <th>Телефон</th>
+                                <th>Вопрос</th>
+                                <th>Дата</th>
+                            </tr>`;
+                        data.requests.forEach(req => {
+                            html += `<tr>
+                                <td>${req.id}</td>
+                                <td>${req.user_id ?? ''}</td>
+                                <td>${req.username}</td>
+                                <td>${req.name}</td>
+                                <td>${req.telephone}</td>
+                                <td>${req.question}</td>
+                                <td>${req.created_at}</td>
+                            </tr>`;
+                        });
+                        html += `</table>`;
+                        reportsRequestsTable.innerHTML = html;
+                        reportsRequestsTable.classList.remove('visually-hidden');
+                        reportsTable.classList.add('visually-hidden');
+                    } else {
+                        reportsRequestsTable.innerHTML = '<div style="color:red;">Ошибка загрузки данных</div>';
+                        reportsRequestsTable.classList.remove('visually-hidden');
+                        reportsTable.classList.add('visually-hidden');
                     }
                 });
         });
