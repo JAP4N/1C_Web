@@ -102,14 +102,22 @@ if (registerBtn) {
     });
 
     // Корзина
-    const cartIcon = document.querySelector('.cart-icon');
-    const cartModal = document.querySelector('.cart-modal');
-    const cartList = document.querySelector('.cart-list');
+    const cartPhoneInput = document.querySelector('#cart-phone');
     const cartOrderBtn = document.querySelector('.cart-modal__order-btn');
+    const cartModal = document.querySelector('.cart-modal');
     const cartCloseBtn = document.querySelector('.cart-modal__close-btn');
+    const cartList = document.querySelector('.cart-list');
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 
+    // Проверяем, существует ли поле ввода номера телефона
+    if (cartPhoneInput) {
+        cartPhoneInput.addEventListener('input', function () {
+            cartOrderBtn.disabled = !cartPhoneInput.value.trim(); // Активируем кнопку, если поле заполнено
+        });
+    }
+
     // Проверяем, существует ли иконка корзины
+    const cartIcon = document.querySelector('.cart-icon');
     if (cartIcon) {
         cartIcon.addEventListener('click', function () {
             updateCartUI();
@@ -127,33 +135,36 @@ if (registerBtn) {
     // Проверяем, существует ли кнопка оформления заказа
     if (cartOrderBtn) {
         cartOrderBtn.addEventListener('click', function () {
+            const phone = cartPhoneInput.value.trim();
             fetch('order.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ cart }),
+                body: JSON.stringify({ cart, phone }),
             })
                 .then((res) => res.json())
                 .then((data) => {
                     if (data.success) {
-                        showMessage('Заказ оформлен!', 'success');
+                        showMessage('Заказ успешно оформлен!', 'success');
                         cart = [];
                         localStorage.setItem('cart', JSON.stringify(cart));
                         updateCartUI();
-                        setTimeout(() => cartModal.classList.remove('active'), 1200);
+                        cartModal.classList.remove('active');
+                        cartPhoneInput.value = ''; // Очищаем поле ввода номера телефона
                     } else {
-                        showMessage('Ошибка оформления заказа', 'error');
+                        showMessage(data.message, 'error');
                     }
-                });
+                })
+                .catch((error) => console.error('Ошибка:', error));
         });
     }
 
     // Функция обновления интерфейса корзины
     function updateCartUI() {
-        if (!cartList) return; // Проверяем, существует ли список корзины
+        if (!cartList) return;
         cartList.innerHTML = '';
         if (cart.length === 0) {
             cartList.innerHTML = '<li>Корзина пуста</li>';
-            if (cartOrderBtn) cartOrderBtn.disabled = true;
+            cartOrderBtn.disabled = true;
         } else {
             cart.forEach((item) => {
                 const li = document.createElement('li');
@@ -171,7 +182,7 @@ if (registerBtn) {
                 li.appendChild(removeBtn);
                 cartList.appendChild(li);
             });
-            if (cartOrderBtn) cartOrderBtn.disabled = false;
+            cartOrderBtn.disabled = !cartPhoneInput.value.trim(); // Проверяем поле телефона при обновлении корзины
         }
     }
 
@@ -188,4 +199,50 @@ if (registerBtn) {
             }
         });
     });
+
+    const orderModal = document.querySelector('.order-modal');
+    const orderForm = document.querySelector('#order-form');
+    const orderCloseBtn = document.querySelector('.order-modal__close-btn');
+
+    // Показать форму завершения заказа
+    if (cartOrderBtn) {
+        cartOrderBtn.addEventListener('click', function () {
+            cartModal.classList.remove('active');
+            orderModal.classList.add('active');
+        });
+    }
+
+    // Закрыть форму завершения заказа
+    if (orderCloseBtn) {
+        orderCloseBtn.addEventListener('click', function () {
+            orderModal.classList.remove('active');
+        });
+    }
+
+    // Отправка данных заказа
+    if (orderForm) {
+        orderForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const phone = document.querySelector('#phone').value;
+
+            fetch('order.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ cart, phone }),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.success) {
+                        showMessage('Заказ успешно оформлен!', 'success');
+                        cart = [];
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        updateCartUI();
+                        orderModal.classList.remove('active');
+                    } else {
+                        showMessage(data.message, 'error');
+                    }
+                })
+                .catch((error) => console.error('Ошибка:', error));
+        });
+    }
 });

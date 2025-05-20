@@ -183,7 +183,7 @@
             <h2 class="tariffs__title">Тарифы бухгалтерского сопровождения</h2>
             <div class="tariffs__cards">
                 <div class="tariff-card">
-                    <div class="tariff-card__h  eader">Отчетность</div>
+                    <div class="tariff-card__header">Отчетность</div>
                     <div class="tariff-card__desc">
                         Вы самостоятельно вносите в программу все документы, а мы будем рассчитывать налоги и сдавать
                         отчетность.<br><br>
@@ -305,10 +305,27 @@
         <div class="cart-modal__content">
             <h2>Корзина</h2>
             <ul class="cart-list"></ul>
+            <label for="cart-phone">Введите ваш номер телефона:</label>
+            <input type="tel" id="cart-phone" name="phone" placeholder="+7 (999) 123-45-67" required>
             <div class="cart-modal__footer">
-                <button class="btn cart-modal__order-btn">Оформить заказ</button>
+                <button class="btn cart-modal__order-btn" disabled>Оформить заказ</button>
                 <button class="btn cart-modal__close-btn">Закрыть</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Форма для завершения заказа -->
+    <div class="order-modal visually-hidden">
+        <div class="order-modal__content">
+            <h2>Завершение заказа</h2>
+            <form id="order-form">
+                <label for="phone">Введите ваш номер телефона:</label>
+                <input type="tel" id="phone" name="phone" placeholder="+7 (999) 123-45-67" required>
+                <div class="order-modal__footer">
+                    <button type="submit" class="btn order-modal__submit-btn">Завершить заказ</button>
+                    <button type="button" class="btn order-modal__close-btn">Отмена</button>
+                </div>
+            </form>
         </div>
     </div>
 </body>

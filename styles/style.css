@@ -807,3 +807,56 @@
 .cart-modal__close-btn {
     background: #e31e24;
 }
+
+.order-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+}
+
+.order-modal.active {
+    display: flex;
+}
+
+.order-modal__content {
+    background: #fff;
+    border-radius: 8px;
+    padding: 30px 25px;
+    min-width: 320px;
+    max-width: 90vw;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.order-modal__footer {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.order-modal__submit-btn {
+    background: #4caf50;
+}
+
+.order-modal__close-btn {
+    background: #e31e24;
+}
+
+.cart-modal input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+.cart-modal__order-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
