@@ -81,7 +81,6 @@
 }
 
 .header__btn-register,
-.header__btn-reports,
 .header__btn-login {
     width: 189px;
     height: 49px;
@@ -92,6 +91,12 @@
     height: 49px;
     text-decoration: none;
     padding-top: 13px;
+}
+
+.header__btn-reports {
+    width: 79px;
+    height: 49px;
+    text-decoration: none;
 }
 
 .header__btn-conteiner {
@@ -188,6 +193,7 @@
 .menu__list-item-link--drop-info--contacts {
     display: flex;
     justify-content: space-between;
+    gap: 15px;
 }
 
 .menu__list-item-link--image img {
@@ -859,4 +865,43 @@
 .cart-modal__order-btn:disabled {
     background-color: #ccc;
     cursor: not-allowed;
+}
+
+.reports-modal {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.3);
+    justify-content: center;
+    align-items: center;
+}
+.reports-modal.active {
+    display: flex;
+}
+.reports-modal__content {
+    background: #fff;
+    border-radius: 8px;
+    padding: 30px 25px;
+    min-width: 400px;
+    max-width: 95vw;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: flex-start;
+}
+.reports-modal__table {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 20px;
+}
+.reports-modal__table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.reports-modal__table th, .reports-modal__table td {
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+    text-align: left;
 }

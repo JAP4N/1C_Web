@@ -245,4 +245,59 @@ if (registerBtn) {
                 .catch((error) => console.error('Ошибка:', error));
         });
     }
+
+    const reportsBtn = document.querySelector('.header__btn-reports');
+    const reportsModal = document.querySelector('.reports-modal');
+    const reportsOrdersBtn = document.querySelector('.reports-modal__orders-btn');
+    const reportsTable = document.querySelector('.reports-modal__table');
+    const reportsCloseBtn = document.querySelector('.reports-modal__close-btn');
+
+    if (reportsBtn && reportsModal) {
+        reportsBtn.addEventListener('click', function () {
+            reportsModal.classList.add('active');
+            reportsTable.classList.add('visually-hidden');
+        });
+    }
+    if (reportsCloseBtn && reportsModal) {
+        reportsCloseBtn.addEventListener('click', function () {
+            reportsModal.classList.remove('active');
+        });
+    }
+    if (reportsOrdersBtn && reportsTable) {
+        reportsOrdersBtn.addEventListener('click', function () {
+            fetch('get_orders.php')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        let html = `<table>
+                            <tr>
+                                <th>ID</th>
+                                <th>User ID</th>
+                                <th>Имя</th>
+                                <th>Услуга</th>
+                                <th>Цена</th>
+                                <th>Телефон</th>
+                                <th>Дата</th>
+                            </tr>`;
+                        data.orders.forEach(order => {
+                            html += `<tr>
+                                <td>${order.id}</td>
+                                <td>${order.user_id}</td>
+                                <td>${order.username}</td>
+                                <td>${order.service}</td>
+                                <td>${order.price}</td>
+                                <td>${order.phone}</td>
+                                <td>${order.created_at}</td>
+                            </tr>`;
+                        });
+                        html += `</table>`;
+                        reportsTable.innerHTML = html;
+                        reportsTable.classList.remove('visually-hidden');
+                    } else {
+                        reportsTable.innerHTML = '<div style="color:red;">Ошибка загрузки данных</div>';
+                        reportsTable.classList.remove('visually-hidden');
+                    }
+                });
+        });
+    }
 });

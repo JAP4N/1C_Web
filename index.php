@@ -22,6 +22,9 @@
                 <?php if (!isset($_SESSION['user_id'])): ?>
                     <button class="btn header__btn-register">Зарегистрироваться</button>
                     <button class="btn header__btn-login">Авторизоваться</button>
+                <?php elseif ($_SESSION['username'] === 'admin'): ?>
+                    <button class="btn header__btn-reports">Отчеты</button>
+                    <a href="logout.php" class="btn header__btn-exit">Выйти</a>
                 <?php else: ?>
                     <img src="./imeges/cart-shopping-fast-svgrepo-com.svg" alt="Корзина" class="cart-icon" style="cursor:pointer;width:40px;height:40px;margin-right:10px;">
                     <p>Добро пожаловать, <?= htmlspecialchars($_SESSION['username']) ?>!</p>
@@ -326,6 +329,16 @@
                     <button type="button" class="btn order-modal__close-btn">Отмена</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно отчетов -->
+    <div class="reports-modal">
+        <div class="reports-modal__content">
+            <h2>Отчеты</h2>
+            <button class="btn reports-modal__orders-btn">Оформленные заказы пользователей</button>
+            <div class="reports-modal__table visually-hidden"></div>
+            <button class="btn reports-modal__close-btn" style="margin-top:20px;">Закрыть</button>
         </div>
     </div>
 </body>
