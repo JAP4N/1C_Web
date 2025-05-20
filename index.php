@@ -99,9 +99,9 @@
                             </div>
                         </div>
                     </li>
+                    <li class="menu__list-item"><img class="navigation_loop" src="./imeges/Link.svg" alt="-"></li>
                 </ul>
             </nav>
-            <img class="navigation_loop" src="./imeges/Link.svg" alt="-">
         </div>
     </header>
 
@@ -129,7 +129,7 @@
         <button class="register-form__btn" type="submit">Зарегистрироваться</button>
     </form>
 
-    <main class="main">
+    <main class="main content-section">
         <section class="advantages content-section">
             <form class="advantages-form" action="" method="">
                 <h2 class="advantages__form-title">Получить консультацию по
@@ -205,7 +205,10 @@
                         <li>консультируем вас по налогам и учету</li>
                         <li>устанавливаем чат и личный кабинет для взаимодействия с бухгалтером</li>
                     </ul>
-                    <button class="btn tariff-card__btn">Добавить в <br>корзину</button>
+                    <?php $isAdmin = (isset($_SESSION['username']) && $_SESSION['username'] === 'admin'); ?>
+                    <button class="btn tariff-card__btn" <?php if ($isAdmin) echo 'disabled style="opacity:0.6;cursor:not-allowed;"'; ?>>
+                        Добавить в <br>корзину
+                    </button>
                 </div>
                 <div class="tariff-card">
                     <div class="tariff-card__header">Комплексный сервис</div>
@@ -227,14 +230,17 @@
                         <li>собираем, систематизируем и контролируем оформление первичных документов</li>
                         <li>консультируем по бухгалтерскому и налоговому учету</li>
                     </ul>
-                    <button class="btn tariff-card__btn">Добавить в <br>корзину</button>
+                    <?php $isAdmin = (isset($_SESSION['username']) && $_SESSION['username'] === 'admin'); ?>
+                    <button class="btn tariff-card__btn" <?php if ($isAdmin) echo 'disabled style="opacity:0.6;cursor:not-allowed;"'; ?>>
+                        Добавить в <br>корзину
+                    </button>
                 </div>
             </div>
         </section>
 
     </main>
     <footer class="footer">
-        <div class="footer__main content-section">
+        <div class="footer__main">
             <div class="footer__col">
                 <div class="footer__col-title">Компания</div>
                 <ul class="footer__list">

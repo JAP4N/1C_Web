@@ -3,6 +3,7 @@
     max-width: 1440px;
     min-width: 100px;
     margin: auto;
+    padding: 15px;
 }
 
 .visually-hidden {
@@ -120,7 +121,7 @@
 
 .menu__main {
     width: 100%;
-    max-width: 1245px;
+    min-width: 395px;
 }
 
 .menu__list {
@@ -128,6 +129,7 @@
     flex-direction: row;
     list-style: none;
     justify-content: space-between;
+    align-items: center;
 }
 
 .menu__list-item-link {
@@ -518,10 +520,10 @@
     padding: 12px 0;
 }
 
-.header,
+/* .header,
 .main {
     padding: 0 15px;
-}
+} */
 
 .footer {
     background: #232323;
@@ -536,6 +538,7 @@
     gap: 40px;
     max-width: 1440px;
     margin: 0 auto;
+    padding: 0 15px;
     flex-wrap: wrap;
 }
 .footer__col {
