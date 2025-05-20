@@ -36,66 +36,120 @@
             <nav class="menu__main">
                 <ul class="menu__list">
                     <li class="menu__list-item">
-                        <a class="menu__list-item-link menu__list-item-link--about" href="">О нас</a>
+                        <a class="menu__list-item-link menu__list-item-link--about" href="#">О нас</a>
                         <div class="menu__list-item-link--drop-info">
-                            <p>
-                                Мы — компания 1С:БухОбслуживание Простые решения. Живем и работаем в красивом древнем
-                                городе Смоленске. Занимаемся автоматизацией предприятий России и Белоруссии,
-                                бухгалтерским и юридическим сопровождением бизнеса. Мы используем современные
-                                технологии, делаем свою работу хорошо и честно, стараясь найти простые решения для
-                                сложных задач.
-                                <br>
-                                <br>
-                                В команде БухОбслуживания 17 человек: руководитель, главные бухгалтеры, бухгалтеры,
-                                оператор по вводу данных и менеджер. Такая небольшая команда помогает более 300 клиентам
-                                вести учёт точно и без ошибок. Главные показатели регулярно проверяет автоматическая
-                                система, а фирма 1С проводит Централизованный аудит и проверяет, как мы ведём учёт для
-                                клиентов. Получается двойная проверка качества.
-                            </p>
-                        </div>
-                    </li>
-                    <li class="menu__list-item">
-                        <a class="menu__list-item-link menu__list-item-link--services" href="">Бухгалтерские услуги</a>
-                        <div class="menu__list-item-link--drop-info">
-                            <ul class="menu__list-item-link--drop-info-list">
-                                <li class="menu__list-item-link--drop-info-list-item">Регистрация ИП</li>
-                                <li class="menu__list-item-link--drop-info-list-item">Регистрация ООО</li>
-                                <li class="menu__list-item-link--drop-info-list-item">Восстановление бухгалтерского
-                                    учёта</li>
-                                <li class="menu__list-item-link--drop-info-list-item">Учёт для продавцов на
-                                    маркетплейсах</li>
-                                <li class="menu__list-item-link--drop-info-list-item">Услуги для граждан Белоруссии:<br>
-                                    открытие фирмы, бухобслуживание</li>
-                                <li class="menu__list-item-link--drop-info-list-item">Маркировка</li>
-                                <li class="menu__list-item-link--drop-info-list-item">Экспресс-аудит бухгалтерского
-                                    учёта</li>
-                                <li class="menu__list-item-link--drop-info-list-item">Ввод первичных документов</li>
-                                <li class="menu__list-item-link--drop-info-list-item">Доступ к программе для учёта</li>
-                                <li class="menu__list-item-link--drop-info-list-item">Проверка контрагентов 1СПАРК Риски
-                                </li>
-                                <li class="menu__list-item-link--drop-info-list-item">Подключение к 1С-ЭДО</li>
-                                <li class="menu__list-item-link--drop-info-list-item">Подключение 1С:Распознавание<br>
-                                    первичных документов</li>
-                                <li class="menu__list-item-link--drop-info-list-item">Аутстаффинг бизнес-ассистентов
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="menu__list-item">
-                        <a class="menu__list-item-link menu__list-item-link--contacts" href="">Контакты</a>
-                        <div class="menu__list-item-link--drop-info menu__list-item-link--drop-info--contacts">
-                            <div class="menu__list-item-link--image">
-                                <img src="./imeges/bff139fa05ac583f685a523ab3d110a0_1_1_1_1_1_1.png" alt="">
+                            <div class="about-content">
+                                <div class="about-content__text">
+                                    <p>
+                                        Мы — компания 1С:БухОбслуживание Простые решения. Живем и работаем в красивом древнем
+                                        городе Смоленске. Занимаемся автоматизацией предприятий России и Белоруссии,
+                                        бухгалтерским и юридическим сопровождением бизнеса. Мы используем современные
+                                        технологии, делаем свою работу хорошо и честно, стараясь найти простые решения для
+                                        сложных задач.
+                                    </p>
+                                    <p>
+                                        В команде БухОбслуживания 17 человек: руководитель, главные бухгалтеры, бухгалтеры,
+                                        оператор по вводу данных и менеджер. Такая небольшая команда помогает более 300 клиентам
+                                        вести учёт точно и без ошибок.
+                                    </p>
+                                </div>
+                                <div class="about-content__image">
+                                    <img src="./imeges/1Cimage.png" alt="1С БухОбслуживание">
+                                </div>
                             </div>
-                            <div class="header__contacts header__contacts--drop-info">
-                                <p class="header__contacts-date">Пн-Пт 09:00 – 18:00</p>
-                                <p class="header__contacts-word">Контакты</p>
-                                <a class="header__contacts-telephone" href="tel:+99995555555">
-                                    +7 (951) 357-651
-                                </a>
-                                <a class="header__contacts-telephone" href="tel:+99995555555">
-                                    +7 (952) 535-61-13
-                                </a>
+                        </div>
+                    </li>
+                    <li class="menu__list-item">
+                        <a class="menu__list-item-link menu__list-item-link--services" href="#">Бухгалтерские услуги</a>
+                        <div class="menu__list-item-link--drop-info">
+                            <div class="services-content">
+                                <ul class="services-content__list">
+                                    <li class="services-content__item">
+                                        <img src="./imeges/square-terminal-svgrepo-com.svg" alt="Иконка" class="services-content__icon">
+                                        Регистрация ИП
+                                    </li>
+                                    <li class="services-content__item">
+                                        <img src="./imeges/square-terminal-svgrepo-com.svg" alt="Иконка" class="services-content__icon">
+                                        Регистрация ООО
+                                    </li>
+                                    <li class="services-content__item">
+                                        <img src="./imeges/square-terminal-svgrepo-com.svg" alt="Иконка" class="services-content__icon">
+                                        Восстановление бухгалтерского учета
+                                    </li>
+                                    <li class="services-content__item">
+                                        <img src="./imeges/square-terminal-svgrepo-com.svg" alt="Иконка" class="services-content__icon">
+                                        Учет для продавцов на маркетплейсах
+                                    </li>
+                                    <li class="services-content__item">
+                                        <img src="./imeges/square-terminal-svgrepo-com.svg" alt="Иконка" class="services-content__icon">
+                                        Услуги для граждан Белоруссии
+                                    </li>
+                                    <li class="services-content__item">
+                                        <img src="./imeges/square-terminal-svgrepo-com.svg" alt="Иконка" class="services-content__icon">
+                                        Маркировка
+                                    </li>
+                                    <li class="services-content__item">
+                                        <img src="./imeges/square-terminal-svgrepo-com.svg" alt="Иконка" class="services-content__icon">
+                                        Экспресс-аудит бухгалтерского учета
+                                    </li>
+                                    <li class="services-content__item">
+                                        <img src="./imeges/square-terminal-svgrepo-com.svg" alt="Иконка" class="services-content__icon">
+                                        Ввод первичных документов
+                                    </li>
+                                    <li class="services-content__item">
+                                        <img src="./imeges/square-terminal-svgrepo-com.svg" alt="Иконка" class="services-content__icon">
+                                        Доступ к программе для учета
+                                    </li>
+                                    <li class="services-content__item">
+                                        <img src="./imeges/square-terminal-svgrepo-com.svg" alt="Иконка" class="services-content__icon">
+                                        Проверка контрагентов 1СПАРК Риски
+                                    </li>
+                                    <li class="services-content__item">
+                                        <img src="./imeges/square-terminal-svgrepo-com.svg" alt="Иконка" class="services-content__icon">
+                                        Подключение к 1С-ЭДО
+                                    </li>
+                                    <li class="services-content__item">
+                                        <img src="./imeges/square-terminal-svgrepo-com.svg" alt="Иконка" class="services-content__icon">
+                                        Подключение 1С:Распознавание первичных документов
+                                    </li>
+                                    <li class="services-content__item">
+                                        <img src="./imeges/square-terminal-svgrepo-com.svg" alt="Иконка" class="services-content__icon">
+                                        Аутстаффинг бизнес-ассистентов
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="menu__list-item">
+                        <a class="menu__list-item-link menu__list-item-link--contacts" href="#">Контакты</a>
+                        <div class="menu__list-item-link--drop-info menu__list-item-link--drop-info--contacts">
+                            <div class="contacts-content">
+                                <div class="contacts-content__image">
+                                    <img src="./imeges/bff139fa05ac583f685a523ab3d110a0_1_1_1_1_1_1.png" alt="Контакты">
+                                </div>
+                                <div class="contacts-content__info">
+                                    <p class="contacts-content__schedule">
+                                        <img src="./imeges/clock-seven-svgrepo-com.svg" alt="Часы" class="contacts-content__icon">
+                                        Пн-Пт 09:00 – 18:00
+                                    </p>
+                                    <p class="contacts-content__title">Контакты</p>
+                                    <a class="contacts-content__phone" href="tel:+7951357651">
+                                        <img src="./imeges/clock-seven-svgrepo-com.svg" alt="Телефон" class="contacts-content__icon">
+                                        +7 (951) 357-651
+                                    </a>
+                                    <a class="contacts-content__phone" href="tel:+79525356113">
+                                        <img src="./imeges/clock-seven-svgrepo-com.svg" alt="Телефон" class="contacts-content__icon">
+                                        +7 (952) 535-61-13
+                                    </a>
+                                    <p class="contacts-content__email">
+                                        <img src="./imeges/clock-seven-svgrepo-com.svg" alt="Почта" class="contacts-content__icon">
+                                        <a href="mailto:bo@1eska.ru">bo@1eska.ru</a>
+                                    </p>
+                                    <p class="contacts-content__address">
+                                        <img src="./imeges/clock-seven-svgrepo-com.svg" alt="Адрес" class="contacts-content__icon">
+                                        Смоленск, Большая Краснофлотская, д. 34, второй этаж
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </li>
