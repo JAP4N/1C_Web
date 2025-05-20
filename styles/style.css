@@ -335,6 +335,13 @@
     max-width: 367px;
     height: 49px;
     cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s, cursor 0.2s;
+}
+
+.advantages-form__btn:disabled {
+    background-color: #ccc; /* Бледный цвет */
+    opacity: 0.6; /* Прозрачность */
+    cursor: not-allowed; /* Указатель "запрещено" */
 }
 
 .advantages-form__input--check:checked + .advantages-form__accept--text::after {

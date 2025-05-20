@@ -300,4 +300,37 @@ if (registerBtn) {
                 });
         });
     }
+
+    // Для advantages-form: блокировка кнопки без согласия
+    const advForm = document.querySelector('.advantages-form');
+    if (advForm) {
+        const acceptCheckbox = advForm.querySelector('.advantages-form__input--check');
+        const submitBtn = advForm.querySelector('.advantages-form__btn');
+        submitBtn.disabled = !acceptCheckbox.checked; // Всегда блокируем, если галочка не стоит
+        acceptCheckbox.addEventListener('change', function () {
+            submitBtn.disabled = !acceptCheckbox.checked;
+        });
+
+        // Отправка формы через AJAX
+        advForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (!acceptCheckbox.checked) return; // Не отправлять, если галочка не стоит
+            const formData = new FormData(advForm);
+            fetch('save_advantages_form.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    showMessage('Ваша заявка отправлена!', 'success');
+                    advForm.reset();
+                    submitBtn.disabled = true;
+                } else {
+                    showMessage(data.message || 'Ошибка отправки', 'error');
+                }
+            })
+            .catch(() => showMessage('Ошибка отправки', 'error'));
+        });
+    }
 });
