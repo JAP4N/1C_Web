@@ -81,13 +81,17 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Ошибка:', error));
     });
 
+   if (loginBtn) {
     loginBtn.addEventListener('click', function () {
         openModal(loginForm);
     });
+}
 
+if (registerBtn) {
     registerBtn.addEventListener('click', function () {
         openModal(registerForm);
     });
+}
 
     overlay.addEventListener('click', closeModal);
 
@@ -95,5 +99,93 @@ document.addEventListener('DOMContentLoaded', function () {
         if (e.key === 'Escape') {
             closeModal();
         }
+    });
+
+    // Корзина
+    const cartIcon = document.querySelector('.cart-icon');
+    const cartModal = document.querySelector('.cart-modal');
+    const cartList = document.querySelector('.cart-list');
+    const cartOrderBtn = document.querySelector('.cart-modal__order-btn');
+    const cartCloseBtn = document.querySelector('.cart-modal__close-btn');
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    // Проверяем, существует ли иконка корзины
+    if (cartIcon) {
+        cartIcon.addEventListener('click', function () {
+            updateCartUI();
+            cartModal.classList.add('active');
+        });
+    }
+
+    // Проверяем, существует ли кнопка закрытия корзины
+    if (cartCloseBtn) {
+        cartCloseBtn.addEventListener('click', function () {
+            cartModal.classList.remove('active');
+        });
+    }
+
+    // Проверяем, существует ли кнопка оформления заказа
+    if (cartOrderBtn) {
+        cartOrderBtn.addEventListener('click', function () {
+            fetch('order.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ cart }),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.success) {
+                        showMessage('Заказ оформлен!', 'success');
+                        cart = [];
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        updateCartUI();
+                        setTimeout(() => cartModal.classList.remove('active'), 1200);
+                    } else {
+                        showMessage('Ошибка оформления заказа', 'error');
+                    }
+                });
+        });
+    }
+
+    // Функция обновления интерфейса корзины
+    function updateCartUI() {
+        if (!cartList) return; // Проверяем, существует ли список корзины
+        cartList.innerHTML = '';
+        if (cart.length === 0) {
+            cartList.innerHTML = '<li>Корзина пуста</li>';
+            if (cartOrderBtn) cartOrderBtn.disabled = true;
+        } else {
+            cart.forEach((item) => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Удалить';
+                removeBtn.className = 'btn';
+                removeBtn.style.background = '#f44336';
+                removeBtn.style.marginLeft = '10px';
+                removeBtn.onclick = () => {
+                    cart = cart.filter((i) => i !== item);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartUI();
+                };
+                li.appendChild(removeBtn);
+                cartList.appendChild(li);
+            });
+            if (cartOrderBtn) cartOrderBtn.disabled = false;
+        }
+    }
+
+    // Добавление товаров в корзину
+    document.querySelectorAll('.tariff-card__btn').forEach((btn, idx) => {
+        btn.addEventListener('click', function () {
+            const product = idx === 0 ? 'Отчетность' : 'Комплексный сервис';
+            if (!cart.includes(product)) {
+                cart.push(product);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                showMessage('Товар добавлен в корзину', 'success');
+            } else {
+                showMessage('Товар уже в корзине', 'error');
+            }
+        });
     });
 });

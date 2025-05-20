@@ -23,6 +23,7 @@
                     <button class="btn header__btn-register">Зарегистрироваться</button>
                     <button class="btn header__btn-login">Авторизоваться</button>
                 <?php else: ?>
+                    <img src="./imeges/cart-shopping-fast-svgrepo-com.svg" alt="Корзина" class="cart-icon" style="cursor:pointer;width:40px;height:40px;margin-right:10px;">
                     <p>Добро пожаловать, <?= htmlspecialchars($_SESSION['username']) ?>!</p>
                     <a href="logout.php" class="btn header__btn-exit">Выйти</a>
                 <?php endif; ?>
@@ -182,7 +183,7 @@
             <h2 class="tariffs__title">Тарифы бухгалтерского сопровождения</h2>
             <div class="tariffs__cards">
                 <div class="tariff-card">
-                    <div class="tariff-card__header">Отчетность</div>
+                    <div class="tariff-card__h  eader">Отчетность</div>
                     <div class="tariff-card__desc">
                         Вы самостоятельно вносите в программу все документы, а мы будем рассчитывать налоги и сдавать
                         отчетность.<br><br>
@@ -298,6 +299,18 @@
             </div>
         </div>
     </footer>
+
+    <!-- Корзина -->
+    <div class="cart-modal">
+        <div class="cart-modal__content">
+            <h2>Корзина</h2>
+            <ul class="cart-list"></ul>
+            <div class="cart-modal__footer">
+                <button class="btn cart-modal__order-btn">Оформить заказ</button>
+                <button class="btn cart-modal__close-btn">Закрыть</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
