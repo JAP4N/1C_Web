@@ -1097,3 +1097,25 @@
     border-spacing: 0 10px;
     margin-top: 20px;
 }
+
+.reports-modal__export {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.reports-modal__export-word,
+.reports-modal__export-excel {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reports-modal__export-word:hover,
+.reports-modal__export-excel:hover {
+    background-color: #45a049;
+}

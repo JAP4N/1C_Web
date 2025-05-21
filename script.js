@@ -257,6 +257,8 @@ if (registerBtn) {
     const reportsOverdueTable = document.querySelector('.reports-modal__overdue-table');
     const reportsTopServicesBtn = document.querySelector('.reports-modal__top-services-btn');
     const reportsTopServicesTable = document.querySelector('.reports-modal__top-services-table');
+    const exportWordBtn = document.querySelector('.reports-modal__export-word');
+    const exportExcelBtn = document.querySelector('.reports-modal__export-excel');
 
     if (reportsBtn && reportsModal) {
         reportsBtn.addEventListener('click', function () {
@@ -466,5 +468,66 @@ if (registerBtn) {
                 })
                 .catch(error => console.error('Ошибка:', error));
         });
+    }
+
+    if (exportWordBtn) {
+        exportWordBtn.addEventListener('click', function () {
+            const reportType = prompt('Введите тип отчета (orders, requests, overdue, top_services):');
+            if (!reportType) {
+                alert('Вы должны указать тип отчета!');
+                return;
+            }
+            const startDate = reportType === 'top_services' ? prompt('Введите начальную дату (YYYY-MM-DD):') : null;
+            const endDate = reportType === 'top_services' ? prompt('Введите конечную дату (YYYY-MM-DD):') : null;
+
+            let url = `export_report.php?report_type=${reportType}&format=word`;
+            if (startDate && endDate) {
+                url += `&start_date=${startDate}&end_date=${endDate}`;
+            }
+            window.location.href = url;
+        });
+    }
+
+    if (exportExcelBtn) {
+        exportExcelBtn.addEventListener('click', function () {
+            const reportType = prompt('Введите тип отчета (orders, requests, overdue, top_services):');
+            if (!reportType) {
+                alert('Вы должны указать тип отчета!');
+                return;
+            }
+            const startDate = reportType === 'top_services' ? prompt('Введите начальную дату (YYYY-MM-DD):') : null;
+            const endDate = reportType === 'top_services' ? prompt('Введите конечную дату (YYYY-MM-DD):') : null;
+
+            let url = `export_report.php?report_type=${reportType}&format=excel`;
+            if (startDate && endDate) {
+                url += `&start_date=${startDate}&end_date=${endDate}`;
+            }
+            window.location.href = url;
+        });
+    }
+
+    if (reportsModal) {
+        // Закрытие окна "Отчеты" при клике мимо окна
+        reportsModal.addEventListener('click', function (e) {
+            if (e.target === reportsModal) {
+                closeReportsModal();
+            }
+        });
+
+        // Закрытие окна "Отчеты" при нажатии Esc
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && reportsModal.classList.contains('active')) {
+                closeReportsModal();
+            }
+        });
+    }
+
+    // Функция для закрытия окна "Отчеты"
+    function closeReportsModal() {
+        reportsModal.classList.remove('active');
+        reportsTable.classList.add('visually-hidden');
+        if (reportsRequestsTable) reportsRequestsTable.classList.add('visually-hidden');
+        if (reportsOverdueTable) reportsOverdueTable.classList.add('visually-hidden');
+        if (reportsTopServicesTable) reportsTopServicesTable.classList.add('visually-hidden');
     }
 });

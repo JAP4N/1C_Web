@@ -404,6 +404,10 @@
             <div class="reports-modal__requests-table visually-hidden"></div>
             <div class="reports-modal__overdue-table visually-hidden"></div>
             <div class="reports-modal__top-services-table visually-hidden"></div>
+            <div class="reports-modal__export">
+                <button class="btn reports-modal__export-word">Экспорт в Word</button>
+                <button class="btn reports-modal__export-excel">Экспорт в Excel</button>
+            </div>
             <button class="btn reports-modal__close-btn" style="margin-top:20px;">Закрыть</button>
         </div>
     </div>

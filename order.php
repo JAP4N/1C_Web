@@ -36,7 +36,7 @@ if ($mysqli->connect_errno) {
 $mysqli->set_charset('utf8mb4');
 
 // Подготовка SQL-запроса
-$stmt = $mysqli->prepare("INSERT INTO orders (user_id, username, service, price, phone, created_at) VALUES (?, ?, ?, ?, ?, NOW())");
+$stmt = $mysqli->prepare("INSERT INTO orders (user_id, username, service, price, phone, created_at, deadline) VALUES (?, ?, ?, ?, ?, NOW(), DATE_ADD(NOW(), INTERVAL 10 DAY))");
 
 // Добавляем каждую услугу из корзины в таблицу `orders`
 foreach ($cart as $service) {
