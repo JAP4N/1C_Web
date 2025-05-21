@@ -85,6 +85,12 @@
 .header__btn-login {
     width: 189px;
     height: 49px;
+    transition: background-color 0.2s;
+}
+
+.header__btn-register:hover,
+.header__btn-login:hover {
+    background-color: #fecc00;
 }
 
 .header__btn-exit {
@@ -92,12 +98,19 @@
     height: 49px;
     text-decoration: none;
     padding-top: 13px;
+    transition: background-color 0.2s;
 }
 
 .header__btn-reports {
     width: 79px;
     height: 49px;
     text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.header__btn-exit:hover,
+.header__btn-reports:hover {
+    background-color: #fecc00;
 }
 
 .header__btn-conteiner {
@@ -532,6 +545,11 @@
     font-size: 1rem;
     font-weight: 600;
     padding: 12px 0;
+    transition: background-color 0.2s;
+}
+
+.tariff-card__btn:hover {
+    background: #fecc00;
 }
 
 .footer {
@@ -903,6 +921,25 @@
     gap: 18px;
     align-items: flex-start;
 }
+
+.reports-modal__orders-btn,
+.reports-modal__requests-btn,
+.reports-modal__overdue-btn,
+.reports-modal__top-services-btn,
+.reports-modal__unpaid-btn,
+.reports-modal__close-btn {
+    transition: background-color 0.2s;
+}
+
+.reports-modal__orders-btn:hover,
+.reports-modal__requests-btn:hover,
+.reports-modal__overdue-btn:hover,
+.reports-modal__top-services-btn:hover,
+.reports-modal__unpaid-btn:hover,
+.reports-modal__close-btn:hover {
+    background-color: #fecc00;
+}
+
 .reports-modal__table {
     width: 100%;
     overflow-x: auto;
