@@ -399,9 +399,11 @@
             <button class="btn reports-modal__orders-btn">Оформленные заказы пользователей</button>
             <button class="btn reports-modal__requests-btn">Поступившие запросы на консультацию</button>
             <button class="btn reports-modal__overdue-btn">Заказы не выполненные в срок</button>
+            <button class="btn reports-modal__top-services-btn">Услуги с максимальным доходом</button>
             <div class="reports-modal__table visually-hidden"></div>
             <div class="reports-modal__requests-table visually-hidden"></div>
             <div class="reports-modal__overdue-table visually-hidden"></div>
+            <div class="reports-modal__top-services-table visually-hidden"></div>
             <button class="btn reports-modal__close-btn" style="margin-top:20px;">Закрыть</button>
         </div>
     </div>

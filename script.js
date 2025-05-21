@@ -255,6 +255,8 @@ if (registerBtn) {
     const reportsRequestsTable = document.querySelector('.reports-modal__requests-table');
     const reportsOverdueBtn = document.querySelector('.reports-modal__overdue-btn');
     const reportsOverdueTable = document.querySelector('.reports-modal__overdue-table');
+    const reportsTopServicesBtn = document.querySelector('.reports-modal__top-services-btn');
+    const reportsTopServicesTable = document.querySelector('.reports-modal__top-services-table');
 
     if (reportsBtn && reportsModal) {
         reportsBtn.addEventListener('click', function () {
@@ -420,6 +422,49 @@ if (registerBtn) {
                 }
             })
             .catch(() => showMessage('Ошибка отправки', 'error'));
+        });
+    }
+
+    if (reportsTopServicesBtn && reportsTopServicesTable) {
+        reportsTopServicesBtn.addEventListener('click', function () {
+            // Запрашиваем промежуток времени у пользователя
+            const startDate = prompt('Введите начальную дату (YYYY-MM-DD):');
+            const endDate = prompt('Введите конечную дату (YYYY-MM-DD):');
+
+            if (!startDate || !endDate) {
+                alert('Вы должны указать обе даты!');
+                return;
+            }
+
+            fetch(`get_top_services.php?start_date=${startDate}&end_date=${endDate}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        let html = `<table>
+                            <tr>
+                                <th>Услуга</th>
+                                <th>Общий доход</th>
+                                <th>Количество заказов</th>
+                            </tr>`;
+                        data.services.forEach(service => {
+                            html += `<tr>
+                                <td>${service.service}</td>
+                                <td>${service.total_income}</td>
+                                <td>${service.total_orders}</td>
+                            </tr>`;
+                        });
+                        html += `</table>`;
+                        reportsTopServicesTable.innerHTML = html;
+                        reportsTopServicesTable.classList.remove('visually-hidden');
+                        reportsTable.classList.add('visually-hidden');
+                        reportsRequestsTable.classList.add('visually-hidden');
+                        reportsOverdueTable.classList.add('visually-hidden');
+                    } else {
+                        reportsTopServicesTable.innerHTML = `<div style="color:red;">${data.message}</div>`;
+                        reportsTopServicesTable.classList.remove('visually-hidden');
+                    }
+                })
+                .catch(error => console.error('Ошибка:', error));
         });
     }
 });
