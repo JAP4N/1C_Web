@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php 
+session_start(); 
+$isAdmin = (isset($_SESSION['username']) && $_SESSION['username'] === 'admin'); // Определяем, является ли пользователь администратором
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -240,10 +243,14 @@
             <h2 class="tariffs__title">Тарифы бухгалтерского сопровождения</h2>
             <div class="tariffs__cards">
                 <div class="tariff-card">
-                    <div class="tariff-card__header">Отчетность</div>
+                    <div class="tariff-card__header">
+                        Отчетность
+                        <?php if ($isAdmin): ?>
+                            <button class="btn tariff-card__delete-btn" data-tariff="Отчетность" style="float: right; background: transparent; color: red; border: none; font-size: 20px; cursor: pointer;">&times;</button>
+                        <?php endif; ?>
+                    </div>
                     <div class="tariff-card__desc">
-                        Вы самостоятельно вносите в программу все документы, а мы будем рассчитывать налоги и сдавать
-                        отчетность.<br><br>
+                        Вы самостоятельно вносите в программу все документы, а мы будем рассчитывать налоги и сдавать отчетность.<br><br>
                         Для клиентов с нулевой отчетностью цена будет еще меньше.
                     </div>
                     <div class="tariff-card__price">От 2 600 руб./мес</div>
@@ -265,7 +272,12 @@
                     </button>
                 </div>
                 <div class="tariff-card">
-                    <div class="tariff-card__header">Комплексный сервис</div>
+                    <div class="tariff-card__header">
+                        Комплексный сервис
+                        <?php if ($isAdmin): ?>
+                            <button class="btn tariff-card__delete-btn" data-tariff="Комплексный сервис" style="float: right; background: transparent; color: red; border: none; font-size: 20px; cursor: pointer;">&times;</button>
+                        <?php endif; ?>
+                    </div>
                     <div class="tariff-card__desc">
                         Мы ведем бухгалтерский, налоговый, кадровый учет и рассчитываем зарплату для ваших
                         сотрудников.<br><br>

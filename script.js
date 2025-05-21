@@ -598,4 +598,15 @@ if (registerBtn) {
         if (reportsTopServicesTable) reportsTopServicesTable.classList.add('visually-hidden');
         if (reportsUnpaidTable) reportsUnpaidTable.classList.add('visually-hidden'); // Скрываем таблицу неоплаченных заказов
     }
+
+    const deleteButtons = document.querySelectorAll('.tariff-card__delete-btn');
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const tariffCard = this.closest('.tariff-card');
+            if (tariffCard) {
+                tariffCard.remove(); // Удаляем карточку с тарифом
+            }
+        });
+    });
 });
