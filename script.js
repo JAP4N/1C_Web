@@ -158,13 +158,32 @@ if (registerBtn) {
         });
     }
 
-    // Функция обновления интерфейса корзины
+    // Добавляем элемент для отображения общей стоимости
+    const cartTotal = document.createElement('div');
+    cartTotal.className = 'cart-total';
+    cartTotal.style.marginTop = '10px';
+    cartTotal.style.fontWeight = 'bold';
+    cartTotal.textContent = 'Общая стоимость: 0 руб.';
+    cartModal.querySelector('.cart-modal__content').appendChild(cartTotal);
+
+    // Функция для обновления общей стоимости
+    function updateCartTotal() {
+        const prices = {
+            'Отчетность': 2600,
+            'Комплексный сервис': 6100
+        };
+        const total = cart.reduce((sum, item) => sum + (prices[item] || 0), 0);
+        cartTotal.textContent = `Общая стоимость: ${total} руб.`;
+    }
+
+    // Обновляем интерфейс корзины
     function updateCartUI() {
         if (!cartList) return;
         cartList.innerHTML = '';
         if (cart.length === 0) {
             cartList.innerHTML = '<li>Корзина пуста</li>';
             cartOrderBtn.disabled = true;
+            cartTotal.textContent = 'Общая стоимость: 0 руб.';
         } else {
             cart.forEach((item) => {
                 const li = document.createElement('li');
@@ -183,6 +202,7 @@ if (registerBtn) {
                 cartList.appendChild(li);
             });
             cartOrderBtn.disabled = !cartPhoneInput.value.trim(); // Проверяем поле телефона при обновлении корзины
+            updateCartTotal(); // Обновляем общую стоимость
         }
     }
 
@@ -194,6 +214,7 @@ if (registerBtn) {
                 cart.push(product);
                 localStorage.setItem('cart', JSON.stringify(cart));
                 showMessage('Товар добавлен в корзину', 'success');
+                updateCartTotal(); // Обновляем общую стоимость
             } else {
                 showMessage('Товар уже в корзине', 'error');
             }
@@ -259,6 +280,8 @@ if (registerBtn) {
     const reportsTopServicesTable = document.querySelector('.reports-modal__top-services-table');
     const exportWordBtn = document.querySelector('.reports-modal__export-word');
     const exportExcelBtn = document.querySelector('.reports-modal__export-excel');
+    const reportsUnpaidBtn = document.querySelector('.reports-modal__unpaid-btn');
+    const reportsUnpaidTable = document.querySelector('.reports-modal__unpaid-table');
 
     if (reportsBtn && reportsModal) {
         reportsBtn.addEventListener('click', function () {
@@ -393,6 +416,50 @@ if (registerBtn) {
                 .catch(error => console.error('Ошибка:', error)); // Добавляем обработку ошибок
     }); // Закрываем addEventListener
 }
+    if (reportsUnpaidBtn && reportsUnpaidTable) {
+        reportsUnpaidBtn.addEventListener('click', function () {
+            fetch('get_unpaid_orders.php')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        let html = `<table>
+                            <tr>
+                                <th>ID</th>
+                                <th>User ID</th>
+                                <th>Имя</th>
+                                <th>Услуга</th>
+                                <th>Цена</th>
+                                <th>Телефон</th>
+                                <th>Дата заказа</th>
+                                <th>Срок выполнения</th>
+                            </tr>`;
+                        data.orders.forEach(order => {
+                            html += `<tr>
+                                <td>${order.id}</td>
+                                <td>${order.user_id}</td>
+                                <td>${order.username}</td>
+                                <td>${order.service}</td>
+                                <td>${order.price}</td>
+                                <td>${order.phone}</td>
+                                <td>${order.created_at}</td>
+                                <td>${order.deadline}</td>
+                            </tr>`;
+                        });
+                        html += `</table>`;
+                        reportsUnpaidTable.innerHTML = html;
+                        reportsUnpaidTable.classList.remove('visually-hidden');
+                        reportsTable.classList.add('visually-hidden');
+                        reportsRequestsTable.classList.add('visually-hidden');
+                        reportsOverdueTable.classList.add('visually-hidden');
+                        reportsTopServicesTable.classList.add('visually-hidden');
+                    } else {
+                        reportsUnpaidTable.innerHTML = '<div style="color:red;">Ошибка загрузки данных</div>';
+                        reportsUnpaidTable.classList.remove('visually-hidden');
+                    }
+                })
+                .catch(error => console.error('Ошибка:', error));
+        });
+    }
 
     // Для advantages-form: блокировка кнопки без согласия
     const advForm = document.querySelector('.advantages-form');
@@ -472,7 +539,7 @@ if (registerBtn) {
 
     if (exportWordBtn) {
         exportWordBtn.addEventListener('click', function () {
-            const reportType = prompt('Введите тип отчета (orders, requests, overdue, top_services):');
+            const reportType = prompt('Введите тип отчета (orders, requests, overdue, top_services, unpaid):');
             if (!reportType) {
                 alert('Вы должны указать тип отчета!');
                 return;
@@ -490,7 +557,7 @@ if (registerBtn) {
 
     if (exportExcelBtn) {
         exportExcelBtn.addEventListener('click', function () {
-            const reportType = prompt('Введите тип отчета (orders, requests, overdue, top_services):');
+            const reportType = prompt('Введите тип отчета (orders, requests, overdue, top_services, unpaid):');
             if (!reportType) {
                 alert('Вы должны указать тип отчета!');
                 return;
@@ -529,5 +596,6 @@ if (registerBtn) {
         if (reportsRequestsTable) reportsRequestsTable.classList.add('visually-hidden');
         if (reportsOverdueTable) reportsOverdueTable.classList.add('visually-hidden');
         if (reportsTopServicesTable) reportsTopServicesTable.classList.add('visually-hidden');
+        if (reportsUnpaidTable) reportsUnpaidTable.classList.add('visually-hidden'); // Скрываем таблицу неоплаченных заказов
     }
 });

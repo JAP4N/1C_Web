@@ -400,10 +400,12 @@
             <button class="btn reports-modal__requests-btn">Поступившие запросы на консультацию</button>
             <button class="btn reports-modal__overdue-btn">Заказы не выполненные в срок</button>
             <button class="btn reports-modal__top-services-btn">Услуги с максимальным доходом</button>
+            <button class="btn reports-modal__unpaid-btn">Неоплаченные заказы</button>
             <div class="reports-modal__table visually-hidden"></div>
             <div class="reports-modal__requests-table visually-hidden"></div>
             <div class="reports-modal__overdue-table visually-hidden"></div>
             <div class="reports-modal__top-services-table visually-hidden"></div>
+            <div class="reports-modal__unpaid-table visually-hidden"></div>
             <div class="reports-modal__export">
                 <button class="btn reports-modal__export-word">Экспорт в Word</button>
                 <button class="btn reports-modal__export-excel">Экспорт в Excel</button>

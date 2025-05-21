@@ -48,6 +48,11 @@ if ($reportType === 'orders') {
         ORDER BY total_income DESC
         LIMIT 10
     ";
+} elseif ($reportType === 'unpaid') {
+    $query = "SELECT id, user_id, username, service, price, phone, created_at, deadline 
+              FROM orders 
+              WHERE paid = FALSE 
+              ORDER BY created_at DESC";
 }
 
 // Проверяем, сформировался ли запрос
