@@ -1173,3 +1173,14 @@
     font-size: 16px;
     color: #333;
 }
+
+.reports-modal__table,
+.reports-modal__requests-table,
+.reports-modal__overdue-table,
+.reports-modal__top-services-table,
+.reports-modal__unpaid-table {
+    max-height: 400px; /* Ограничиваем высоту таблицы */
+    overflow-y: auto; /* Добавляем вертикальную прокрутку */
+    border: 1px solid #ccc; /* Добавляем рамку для визуального разделения */
+    margin-top: 10px; /* Отступ сверху */
+}
